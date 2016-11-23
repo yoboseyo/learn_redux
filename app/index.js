@@ -16,7 +16,7 @@ export default class MainSec extends Component {
     return (
       <div>
         <InputSec onClick={onAddClick} onClick2={onPlusClick}/>
-        <List arr={arr} />
+{/*        <List arr={arr} />*/}
       </div>
     )
   }
@@ -77,10 +77,8 @@ const reducer = function (state={arr:[], count: 0},action) {
   switch(action.type){
     case 'ADD':
       const count = state.count;
-      state.arr.push(action.payload);
       const arr = state.arr;
-      console.log({arr:arr,count:count});
-      return {arr:arr, count:count};
+      return {arr:arr.push(action.payload),count:count};
     case 'DEL':
       let newArr = state.filter(function(item,index){
         return item.id != action.payload
@@ -89,6 +87,7 @@ const reducer = function (state={arr:[], count: 0},action) {
     default:
       return state;
   }
+  console.log(state.arr)
 };
 
 
