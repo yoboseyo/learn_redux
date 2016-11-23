@@ -3,37 +3,13 @@ import ReactDOM from 'react-dom';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { createStore } from 'redux';
 import { combineReducers } from 'redux';
+import { connect } from 'react-redux'
 var section = document.createElement('section');
 document.body.appendChild(section);
 require('./css/antd.min.css');
 require('./css/style.css');
 
-/*const addReducer = function (state = [], action) {
-  switch (action.type) {
-    case 'ADD':
-      state.push(action.payload);
-      return state;
-    default:
-      return state;
-  }
-};
 
-const delReducer = function (state = [], action) {
-  switch (action.type) {
-    case 'DEL':
-      let newArr = state.filter(function(item,index){
-        return item.id != action.payload
-      });
-      return newArr;
-    default:
-      return state;
-  }
-};
-
-const reducer = combineReducers({
-  addReducer,
-  delReducer
-});*/
 
 const reducer = function (state=[],action) {
 

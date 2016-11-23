@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build --port 3000 --inline"
+    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build --port 3000 --inline",
+    "rdev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build --port 3000 --inline --config webpack.react-redux.config.js"
   },
   "author": "",
   "license": "ISC",
