@@ -10,13 +10,13 @@ require('./css/antd.min.css');
 require('./css/style.css');
 
 export default class MainSec extends Component {
-
   render() {
-    const { arr, count, onAddClick, onPlusClick } = this.props;
+    const { arr, count, onAddClick, onPlusClick, onDelClick } = this.props;
     return (
       <div>
         <InputSec onClick={onAddClick} onClick2={onPlusClick}/>
-{/*        <List arr={arr} />*/}
+        <List arr={arr} click={onDelClick} />
+        <div>{count}</div>
       </div>
     )
   }
@@ -43,12 +43,13 @@ class InputSec extends Component {
 
 class List extends Component {
   render() {
+    var func = this.props.click;
     return(
       <ul>
         {
           this.props.arr.map(function(item,index){
             return (
-              <ListItem key={item.id} id={item.id} name={item.name} content={item.content} />
+              <ListItem key={item.id} id={item.id} name={item.name} content={item.content} onDelClick={func}/>
             )
           })
         }
@@ -59,12 +60,13 @@ class List extends Component {
 
 class ListItem extends Component {
   render() {
-
+    const { onDelClick } = this.props;
+    console.log(onDelClick)
     return(
       <li>
         <p>
           {this.props.name}
-          <button >删除</button>
+          <button onClick={() => onDelClick(this.props.id)}>删除</button>
         </p>
         <p>{this.props.content}</p>
       </li>
@@ -76,18 +78,20 @@ const reducer = function (state={arr:[], count: 0},action) {
 
   switch(action.type){
     case 'ADD':
-      const count = state.count;
-      const arr = state.arr;
-      return {arr:arr.push(action.payload),count:count};
+      let nArr = state.arr.concat(action.payload);
+      return {arr: nArr, count: state.count};
+    case 'PLUS':
+      state.count = state.count + 1;
+      return {arr: state.arr, count: state.count};
     case 'DEL':
-      let newArr = state.filter(function(item,index){
+      let newArr = state.arr.filter(function(item,index){
         return item.id != action.payload
       });
-      return newArr;
+      return {arr: newArr, count: state.count};
     default:
       return state;
   }
-  console.log(state.arr)
+
 };
 
 
